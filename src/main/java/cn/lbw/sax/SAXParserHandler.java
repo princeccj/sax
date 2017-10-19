@@ -27,7 +27,8 @@ public class SAXParserHandler extends DefaultHandler {
 	String value = null;
 	boolean isEnd = false;
 	StringBuffer sb = new StringBuffer();
-	public static Set<String> types = new HashSet<String>();
+	public static Set<String> dblpTypes = new HashSet<String>();
+
 	static {
 		try {
 			conn.setAutoCommit(false);
@@ -37,14 +38,14 @@ public class SAXParserHandler extends DefaultHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		types.add("article");
-		types.add("inproceedings");
-		types.add("proceedings");
-		types.add("book");
-		types.add("incollection");
-		types.add("phdthesis");
-		types.add("mastersthesis");
-		types.add("www");
+		dblpTypes.add("article");
+		dblpTypes.add("inproceedings");
+		dblpTypes.add("proceedings");
+		dblpTypes.add("book");
+		dblpTypes.add("incollection");
+		dblpTypes.add("phdthesis");
+		dblpTypes.add("mastersthesis");
+		dblpTypes.add("www");
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class SAXParserHandler extends DefaultHandler {
 		// TODO Auto-generated method stub
 		super.startElement(uri, localName, qName, attributes);
 		sb.delete(0,sb.length());
-		if(types.contains(qName)) {
+		if(dblpTypes.contains(qName)) {
 			dblp = new DBLPInfo();
 			isEnd = false;
 			dblp.setDblp_type(qName);
@@ -71,14 +72,14 @@ public class SAXParserHandler extends DefaultHandler {
 				ps.executeBatch();
 				conn.commit();
 				index++;
-				System.out.println(index);
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 //			appendMethodB("",dblp);
 			System.out.println("最后一批数据写入");
-		}else if(types.contains(name)){
+		}else if(dblpTypes.contains(name)){
 			isEnd = true;
 			DBLPIndex++;
 			try {

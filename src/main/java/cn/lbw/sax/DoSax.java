@@ -15,12 +15,12 @@ public class DoSax {
     public static void main(String[] args) {
         System.setProperty("entityExpansionLimit", "7000000");
         Long start = System.currentTimeMillis();
-        // 获取一个SAXParserFactory实例
+
         SAXParserFactory factory = SAXParserFactory.newInstance();
-        //通过factory获取SAXParser实例
+
         try {
             SAXParser parser = factory.newSAXParser();
-            //创建SAXParserHandler对象
+
             SAXParserHandler handler = new SAXParserHandler();
             parser.parse(new File("dblp.xml"), handler);
         } catch (ParserConfigurationException e) {

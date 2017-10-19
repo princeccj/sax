@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 public class DBConnector {
     private static String dbUrl = "jdbc:mysql://localhost:3306/dblp";
     private static String user = "root";
-    private static String password = "****";
+    private static String password = "0000";
 
     public static Connection getConn() {
         try {
